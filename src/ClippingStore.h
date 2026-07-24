@@ -6,7 +6,7 @@
 
 inline constexpr size_t CLIPPING_CHAPTER_TITLE_MAX = 48;
 inline constexpr size_t CLIPPING_TEXT_MAX = 512;
-inline constexpr uint16_t CLIPPING_MAX_PER_BOOK = 512;
+inline constexpr uint16_t CLIPPING_MAX_PER_BOOK = 350;
 
 struct Clipping {
   uint16_t spineIndex = 0;

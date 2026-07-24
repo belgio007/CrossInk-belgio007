@@ -4475,6 +4475,10 @@ void EpubReaderActivity::drawClippingHighlights(const Page& page, const int font
     if (clipping.spineIndex != static_cast<uint16_t>(currentSpineIndex)) {
       continue;
     }
+    if (canUseStoredRanges && clipping.pageCount == currentPageCount &&
+        (clipping.endPage < currentPage || clipping.startPage > currentPage)) {
+      continue;
+    }
     ClippingPageMatch match;
     const bool matchedStoredRange =
         canUseStoredRanges && findClippingStoredRangeOnPage(page, clipping, currentPage, currentPageCount, match);
