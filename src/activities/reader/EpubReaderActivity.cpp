@@ -2898,6 +2898,21 @@ void EpubReaderActivity::onReaderMenuConfirm(EpubReaderMenuActivity::MenuAction 
           });
       break;
     }
+    case EpubReaderMenuActivity::MenuAction::DELETE_CLIPPINGS: {
+      pauseReadingPaceTimer("delete_clippings_confirm");
+      startActivityForResult(
+          std::make_unique<ConfirmationActivity>(renderer, mappedInput,
+                                                 confirmationHeading(StrId::STR_DELETE_CLIPPINGS),
+                                                 epub ? epub->getTitle() : std::string{}),
+          [this](const ActivityResult& result) {
+            if (!result.isCancelled) {
+              CLIPPINGS.clearAll();
+            }
+            resumeReadingPaceTimer(result.isCancelled ? "delete_clippings_cancel" : "delete_clippings_return");
+            requestUpdate();
+          });
+      break;
+    }
     case EpubReaderMenuActivity::MenuAction::AUTO_PAGE_TURN:
       openAutoPageTurnIntervalPicker();
       break;

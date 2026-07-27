@@ -38,6 +38,7 @@ class EpubReaderMenuActivity final : public Activity {
     BOOKMARK_TOGGLE,
     VIEW_BOOKMARKS,
     DELETE_BOOKMARKS,
+    DELETE_CLIPPINGS,
     SAVE_CLIPPING,
     VIEW_CLIPPINGS
   };
