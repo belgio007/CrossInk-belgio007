@@ -57,9 +57,14 @@ void ClipSelectionActivity::onEnter() {
     finish();
     return;
   }
-  cursorIdx = 0;
 
+  cursorIdx = 0;
   savedSectionPage = section.currentPage;
+  // Free the reading-page font cache before allocating the framebuffer snapshot,
+  // so we have maximum contiguous heap available for the buffer + highlight fonts.
+  if (auto* fcm = renderer.getFontCacheManager()) {
+    fcm->clearCache();
+  }
   if (!allocateSavedBuffer()) {
     ActivityResult result;
     result.isCancelled = true;
